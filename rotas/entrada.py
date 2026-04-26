@@ -4,11 +4,13 @@ from models import db, Entrada, Produto
 
 entrada = Blueprint('entrada', __name__, url_prefix='/entrada')
 
+# Home
 @entrada.route('/')
 def entrada_home():
     produtos = Produto.query.order_by(Produto.categoria,Produto.nome).all()
     return render_template('entrada.html', produtos=produtos)
 
+# Cadastro de Tipo de Produto
 @entrada.route('/add_produto', methods = ['POST'])
 def entrada_add_produto():
     nome = unidecode(str(request.form['nome']).upper()) # Tudo em maiúsculo e sem acentuação
@@ -34,3 +36,19 @@ def entrada_api_produtos(cat):
               'nome': p.nome 
             } for p in produtos]
     return jsonify(dados)
+
+
+### Entrada de Mercadorias
+
+@entrada.route('/add_entrada', methods = ['POST'])
+def entrada_add_entrada():
+    produto = request.form['produto']
+    quantidade = request.form['quantidade']
+    validade = request.form['validade']
+    
+    print(produto)
+    print(quantidade)
+    print(validade)
+    
+    return redirect(url_for('entrada.entrada_home'))
+    

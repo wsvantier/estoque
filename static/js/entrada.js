@@ -22,3 +22,16 @@ async function CarregarCategorias(){
 
 // Evento 
 selectCategoria.addEventListener('change', CarregarCategorias);
+
+// Validade Nula
+const checkbox = document.getElementById("indeterminado");
+const validade = document.getElementById("validade");
+
+checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+        validade.readOnly = true;
+        validade.value = ""; // limpa a data
+    } else {
+        validade.readOnly = false;
+    }
+});

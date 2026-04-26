@@ -20,7 +20,7 @@
 </form>
 
 <h3> Entrada de Materiais </h3>
-<form action="" method="post">
+<form action="{{url_for('entrada.entrada_add_entrada')}}" method="post">
     Categoria: <br>
     <select name="cat" id="cat" required>
         <option value="" selected disabled> -- Selecione uma Categoria --</option>
@@ -28,14 +28,20 @@
         <option value="ALMOXARIFADO"> Almoxarifado </option>
         <option value="DESPENSA"> Despensa </option>
     </select><br>
+
     Produto: <br>
     <select name="produto" id="produto">
         <!-- Via JS -->
     </select><br>
     Quantidade: <br>
     <input type="number" name="quantidade" id="quantidade"><br>
+
     Validade: <br>
     <input type="date" name="validade" id="validade"><br>
+
+    <input type="checkbox" name="indeterminado" id="indeterminado"> 
+    <label for="indeterminado"> Validade Indeterminada </label> <br>
+ 
     <input type="submit" value="Adicionar">
 
 </form>
@@ -62,5 +68,6 @@
 </table>
 
 <script src={{url_for('static', filename = 'js/entrada.js') }}></script>
+
 
 {% endblock %}
