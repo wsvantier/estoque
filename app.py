@@ -1,5 +1,8 @@
-from flask import Flask, render_template
-from models import db, Produto, Saida, ItemSaida, Entrada
+from flask import Flask, redirect
+from models import db
+from rotas.entrada import entrada
+from rotas.estoque import estoque
+from rotas.saida import saida
 
 # Criando o app
 app = Flask(__name__)
@@ -10,19 +13,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 # Iniciando exteções
 db.init_app(app)
 
+# Cadastrando blueprints
+app.register_blueprint(entrada)
+app.register_blueprint(saida)
+app.register_blueprint(estoque)
+
 @app.route('/')
 def index():
-    return render_template('estoque.html')
-
-@app.route('/produtos')
-def produtos():
-    return render_template('produtos.html')
-
-@app.route('/saida')
-def saida():
-    return render_template('saida.html')
-
-
+    return redirect('/estoque')
 
 if __name__ == '__main__':
     with app.app_context():
