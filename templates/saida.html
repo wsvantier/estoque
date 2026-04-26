@@ -4,6 +4,34 @@
 
 {% block content %}
 
-saida
+<h3> Saída de Materiais </h3>
+<form action="" method="post">
+
+    <form action="" method="post">
+        <select name="item" id="item">
+            <option value="" selected disabled> -- Selecione -- </option>
+            <!-- Inserção pelo Jinja -->
+        </select><br>
+        Data da retirada:
+        <input type="date" name="dia" id="dia"><br>
+        <input type="submit" value="Adicionar">
+    </form>
+
+    <h3> Itens </h3>
+    Responsável:
+    <input type="text" name="resp" id="resp" required><br>
+    <table>
+        <thead>
+            <tr>
+                <td>Itens</td>
+                <td>Quantidade</td>
+                <td>Ações</td>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Inserção pelo Jinja -->
+        </tbody>
+    </table>
+</form>
 
 {% endblock %}

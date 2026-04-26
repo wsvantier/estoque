@@ -16,12 +16,15 @@ class Entrada(db.Model):
     produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
     validade = db.Column(db.Date, nullable=False)
-    data_entrada = db.Column(db.Date, nullable=False, default=date.today)
+    data_entrada = db.Column(db.Date, nullable=True, default=date.today)
 
     produto = db.relationship('Produto', backref='entradas')
 
     def __repr__(self):
         return f'<Entrada {self.produto.nome} - {self.quantidade}>'
+    
+    def iten_validade (self):
+        return f"{self.produto.nome} - {self.validade}"
 
     def esta_vencido(self):
         return self.validade < date.today()
