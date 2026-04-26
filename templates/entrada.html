@@ -5,31 +5,38 @@
 {% block content %}
 
 <h3> Cadastro de Produtos </h3>
-<form action="" method="post">
+<form action="{{url_for('entrada.entrada_add_produto')}}" method="post">
 
     Nome: <br>
-    <input type="text" name="nome" id="nome"><br>
+    <input type="text" name="nome" id="nome" required><br>
     Categoria: <br>
-    <select name="categoria" id="categoria">
+    <select name="categoria" id="categoria" required>
         <option value="" selected disabled> -- Selecione uma Categoria --</option>
-        <option value="escritorio"> Escritorio </option>
-        <option value="almoxarifado"> Almoxarifado </option>
-        <option value="despensa"> Despensa </option>
+        <option value="ESCRITORIO"> Escritorio </option>
+        <option value="ALMOXARIFADO"> Almoxarifado </option>
+        <option value="DESPENSA"> Despensa </option>
     </select><br>
-<input type="submit" value="Adicionar">
+    <input type="submit" value="Adicionar">
 </form>
 
 <h3> Entrada de Materiais </h3>
 <form action="" method="post">
-Produto: <br>
-<select name="produto" id="produto">
-    <!-- fazer depois -->
-</select><br>
-Quantidade: <br>
-<input type="number" name="quantidade" id="quantidade"><br>
-Validade: <br>
-<input type="date" name="validade" id="validade"><br>
-<input type="submit" value="Adicionar">
+    Categoria: <br>
+    <select name="cat" id="cat" required>
+        <option value="" selected disabled> -- Selecione uma Categoria --</option>
+        <option value="ESCRITORIO"> Escritorio </option>
+        <option value="ALMOXARIFADO"> Almoxarifado </option>
+        <option value="DESPENSA"> Despensa </option>
+    </select><br>
+    Produto: <br>
+    <select name="produto" id="produto">
+        <!-- Via JS -->
+    </select><br>
+    Quantidade: <br>
+    <input type="number" name="quantidade" id="quantidade"><br>
+    Validade: <br>
+    <input type="date" name="validade" id="validade"><br>
+    <input type="submit" value="Adicionar">
 
 </form>
 
@@ -44,8 +51,16 @@ Validade: <br>
         </tr>
     </thead>
     <tbody>
-        <!-- Inserção pelo Jinja -->
+        {% for p in produtos %}
+        <tr>
+            <td> {{p.nome}} </td>
+            <td> {{p.categoria}} </td>
+            <td> --- </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
+
+<script src={{url_for('static', filename = 'js/entrada.js') }}></script>
 
 {% endblock %}

@@ -20,7 +20,7 @@ app.register_blueprint(estoque)
 
 @app.route('/')
 def index():
-    return redirect('/estoque')
+    return redirect('/estoque') # Fazendo o redirecionamento para /estoque
 
 if __name__ == '__main__':
     with app.app_context():
