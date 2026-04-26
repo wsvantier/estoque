@@ -12,7 +12,14 @@
         <th>Validade</th>
     </thead>
     <tbody>
+        {% for item in escritorio %}
+        <tr>
+            <td> {{item.produto.nome}} </td>
+            <td> {{item.quantidade}} </td>
+            <td> {{item.data_ptbr()}} </td>
+        </tr>
 
+        {% endfor %}
     </tbody>
 </table>
 
@@ -26,12 +33,19 @@
         </tr>
     </thead>
     <tbody>
+ {% for item in almoxarifado %}
+        <tr>
+            <td> {{item.produto.nome}} </td>
+            <td> {{item.quantidade}} </td>
+            <td> {{item.data_ptbr()}} </td>
+        </tr>
 
+        {% endfor %}
     </tbody>
 </table>
 
 <h3>Despensa</h3>
-<table id="tab-almoxarifado">
+<table id="tab-despensa">
     <thead>
         <tr>
             <th>Produto</th>
@@ -40,7 +54,14 @@
         </tr>
     </thead>
     <tbody>
+ {% for item in despensa %}
+        <tr>
+            <td> {{item.produto.nome}} </td>
+            <td> {{item.quantidade}} </td>
+            <td> {{item.data_ptbr()}} </td>
+        </tr>
 
+        {% endfor %}
     </tbody>
 </table>
 

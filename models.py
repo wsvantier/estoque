@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import date
+from datetime import date, datetime
 
 db = SQLAlchemy()
 
@@ -15,7 +15,7 @@ class Entrada(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
-    validade = db.Column(db.Date, nullable=False)
+    validade = db.Column(db.Date, nullable=True)
     data_entrada = db.Column(db.Date, nullable=True, default=date.today)
 
     produto = db.relationship('Produto', backref='entradas')
@@ -28,6 +28,12 @@ class Entrada(db.Model):
 
     def esta_vencido(self):
         return self.validade < date.today()
+    
+    def data_ptbr(self):
+        if self.validade:
+            return datetime.strftime(self.validade,'%d/%m/%Y')
+        else:
+            return "Indeterminado"
 
 class Saida(db.Model):
     id = db.Column(db.Integer, primary_key=True)

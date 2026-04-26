@@ -17,6 +17,9 @@
         <option value="DESPENSA"> Despensa </option>
     </select><br>
     <input type="submit" value="Adicionar">
+    {% for msg in get_flashed_messages() %}
+        <div>{{ msg }}</div>
+    {% endfor %}
 </form>
 
 <h3> Entrada de Materiais </h3>
@@ -30,11 +33,11 @@
     </select><br>
 
     Produto: <br>
-    <select name="produto" id="produto">
+    <select name="produto" id="produto" required>
         <!-- Via JS -->
     </select><br>
     Quantidade: <br>
-    <input type="number" name="quantidade" id="quantidade"><br>
+    <input type="number" name="quantidade" id="quantidade" required><br>
 
     Validade: <br>
     <input type="date" name="validade" id="validade"><br>
