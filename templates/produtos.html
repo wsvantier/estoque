@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% block title %} Cadastro de Produtos {% endblock %}
+
+{% block content %}
+
+<h3> Cadastro de Produtos </h3>
+<form action="" method="post">
+
+    Nome: <br>
+    <input type="text" name="nome" id="nome"><br>
+    Categoria: <br>
+    <select name="categoria" id="categoria">
+        <option value="" selected disabled> -- Selecione uma Categoria --</option>
+        <option value="escritorio"> Escritorio </option>
+        <option value="almoxarifado"> Almoxarifado </option>
+        <option value="despensa"> Despensa </option>
+    </select><br>
+<input type="submit" value="Adicionar">
+</form>
+
+<h3> Entrada de Materiais </h3>
+<form action="" method="post">
+Produto: <br>
+<select name="produto" id="produto">
+    <!-- fazer depois -->
+</select><br>
+Quantidade: <br>
+<input type="number" name="quantidade" id="quantidade"><br>
+Validade: <br>
+<input type="date" name="validade" id="validade"><br>
+<input type="submit" value="Adicionar">
+
+</form>
+
+<h3> Produtos Cadastrados </h3>
+
+<table>
+    <thead>
+        <tr>
+            <td> Produto </td>
+            <td> Categoria </td>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+nav ul{
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+}
+
+table, th, td, tr{
+  border: 1px solid #555;
+  border-collapse: collapse;
+}
