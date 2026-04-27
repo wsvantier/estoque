@@ -27,6 +27,35 @@ def entrada_add_produto():
         
     return redirect(url_for('entrada.entrada_home'))
 
+## Alteração do Produto
+
+@entrada.route('/update/<int:id>', methods = ['GET','POST'])
+def entrada_update(id):
+    produto = Produto.query.get(id)
+    if request.method == 'GET':
+        return render_template('altera.html', produto=produto)
+    else:
+        nome = unidecode(str(request.form['nome']).upper())
+        produto.categoria = request.form['categoria']
+        busca = Produto.query.filter_by(nome=nome).first() # Procura pra ver se já existe
+        
+        if busca and busca.id != produto.id:
+            flash(f"{busca.nome} já cadastrado", "warning")
+            return render_template('altera.html', produto=produto)
+        else:
+            produto.nome = nome
+            db.session.commit()
+            return redirect('/entrada')
+
+## Deletar itens que não tiveram entradas
+@entrada.route('/entrada/delete/<int:id>')
+def entrada_delete(id):
+    produto_apagar = Produto.query.get(id)
+    db.session.delete(produto_apagar)
+    db.session.commit()
+    
+    return redirect('/entrada')
+
 # API que filtra por categoria
 
 @entrada.route('/api/produtos/<cat>')

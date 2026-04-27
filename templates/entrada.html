@@ -64,7 +64,12 @@
         <tr>
             <td> {{p.nome}} </td>
             <td> {{p.categoria}} </td>
-            <td> --- </td>
+            <td> <a href="/entrada/update/{{p.id}}"> Editar </a>  
+                {% if not p.usado() %}
+                     / <a href="entrada/delete/{{p.id}}">Excluir</a>
+                {% endif %}
+            
+            </td>
         </tr>
         {% endfor %}
     </tbody>

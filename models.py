@@ -10,6 +10,11 @@ class Produto(db.Model):
 
     def __repr__(self):
         return f'<Produto {self.nome}>'
+    
+    
+    # Função para ser usado na parte de exclusão, para não apagar o que já teve entrada    
+    def usado(self):
+        return len(self.entradas) > 0 
 
 class Entrada(db.Model):
     id = db.Column(db.Integer, primary_key=True)
