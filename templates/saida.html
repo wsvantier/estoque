@@ -6,18 +6,30 @@
 
 <h3> Saída de Materiais </h3>
 <div>
+
 <form action="" method="post">
+    Categoria: <br>
+    <select name="categoria" id="categoria" required>
+        <option value="" selected disabled> -- Selecione uma Categoria --</option>
+        <option value="ESCRITORIO"> Escritorio </option>
+        <option value="ALMOXARIFADO"> Almoxarifado </option>
+        <option value="DESPENSA"> Despensa </option>
+    </select><br>
+</form>
 
-    <form action="" method="post">
-        <select name="item" id="item">
-            <option value="" selected disabled> -- Selecione -- </option>
-            <!-- Inserção pelo Jinja -->
-        </select><br>
-        Data da retirada:
-        <input type="date" name="dia" id="dia"><br>
-        <input type="submit" value="Adicionar">
-    </form>
+<form action="" method="post">
+    <Select id="select_produto">
+        <option value="" selected disabled> -- Selecione um produto -- </option>
+        <!-- Inserção por JS ou Jinja -->
+    </Select>
+</form>
 
+<form action="" method="post">
+    <select name="" id="selectLote">
+        <option value="" selected disabled> -- Selecione um lote (validade) -- </option>
+        <!-- Inserção por JS ou Jinja -->
+    </select>
+</form>
     <h3> Itens </h3>
     Responsável:
     <input type="text" name="resp" id="resp" required><br>
@@ -30,7 +42,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Inserção pelo Jinja -->
+            <!-- Inserção pelo Jinja (session) -->
         </tbody>
     </table>
 </form>
@@ -48,5 +60,41 @@
 
     </tbody>
 </table>
+
+<script>
+const selectForm = document.getElementById('select_produto');
+const selectCategoria = document.getElementById('categoria');
+
+
+// Escuta a mudança no select de categoria
+selectCategoria.addEventListener('change', async function() {
+    const categoriaId = this.value;
+    
+    try {
+        const response = await fetch(`/saida/api/categoria/${categoriaId}`);
+        const dados = await response.json();
+
+        // Limpa opções antigas e mantém o placeholder
+        selectForm.innerHTML = '<option value="" disabled selected> -- Selecione -- </option>';
+
+        // Popula o segundo select
+        dados.forEach(item => {
+            const novaOpcao = new Option(item.nome, item.id);
+            selectForm.add(novaOpcao);
+        });
+    } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+    }
+});
+/* 
+const selectLote = document.getElementById('selectLote')
+
+selectLote.addEventListener('change', asyscv function(){
+
+    
+
+}) */
+
+</script>
 
 {% endblock %}
