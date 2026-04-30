@@ -9,6 +9,13 @@
 
     Nome: <br>
     <input type="text" name="nome" id="nome" required><br>
+    Unidade de medida: <br>
+    <select name="medida" id="medida">
+         <option value="" selected disabled> -- Selecione uma Categoria --</option>
+        <option value="Un"> Unidade </option>
+        <option value="Kg"> Quilograma </option>
+        <option value="L"> Litros </option>
+    </select><br>
     Categoria: <br>
     <select name="categoria" id="categoria" required>
         <option value="" selected disabled> -- Selecione uma Categoria --</option>
@@ -56,6 +63,7 @@
         <tr>
             <td> Produto </td>
             <td> Categoria </td>
+            <td> Unidade de Medida </td>
             <td> Ações </td>
         </tr>
     </thead>
@@ -64,6 +72,7 @@
         <tr>
             <td> {{p.nome}} </td>
             <td> {{p.categoria}} </td>
+            <td> {{p.medida}} </td>
             <td> <a href="/entrada/update/{{p.id}}"> Editar </a>  
                 {% if not p.usado() %}
                      / <a href="entrada/delete/{{p.id}}">Excluir</a>

@@ -4,9 +4,10 @@ from datetime import date, datetime
 db = SQLAlchemy()
 
 class Produto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(), nullable=False, unique=True)
-    categoria = db.Column(db.String(), nullable=False)
+    id = db.Column( db.Integer, primary_key = True )
+    nome = db.Column( db.String(), nullable = False, unique = True )
+    categoria = db.Column( db.String(), nullable = False )
+    medida = db.Column( db.String(), nullable = False ) # Unidade, Kg ou Litro
 
     def __repr__(self):
         return f'<Produto {self.nome}>'

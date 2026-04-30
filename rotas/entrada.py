@@ -16,12 +16,13 @@ def entrada_home():
 def entrada_add_produto():
     nome = unidecode(str(request.form['nome']).upper()) # Tudo em maiúsculo e sem acentuação
     categoria = request.form['categoria']
+    medida = request.form['medida']
     produto = Produto.query.filter_by(nome=nome).first() # Procura se já tem no db
     
     if produto:
        flash('Já cadastrado','warning')
     else:
-        novo_produto = Produto(nome=nome, categoria=categoria)
+        novo_produto = Produto(nome=nome, categoria=categoria, medida=medida)
         db.session.add(novo_produto)
         db.session.commit()
         
@@ -37,6 +38,7 @@ def entrada_update(id):
     else:
         nome = unidecode(str(request.form['nome']).upper())
         produto.categoria = request.form['categoria']
+        produto.medida = request.form['medida']
         busca = Produto.query.filter_by(nome=nome).first() # Procura pra ver se já existe
         
         if busca and busca.id != produto.id:

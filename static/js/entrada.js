@@ -1,6 +1,3 @@
-
-
-
 const selectCategoria = document.getElementById('cat'); // Select da categoria
 const selectProduto = document.getElementById('produto'); // Aonde vai ser inserido os dados
 

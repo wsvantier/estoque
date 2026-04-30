@@ -15,7 +15,7 @@
         {% for item in escritorio %}
         <tr>
             <td> {{item.produto.nome}} </td>
-            <td> {{item.quantidade}} </td>
+            <td> {{item.quantidade}} {{item.produto.medida}} </td>
             <td> {{item.data_ptbr()}} </td>
         </tr>
 
@@ -36,7 +36,7 @@
  {% for item in almoxarifado %}
         <tr>
             <td> {{item.produto.nome}} </td>
-            <td> {{item.quantidade}} </td>
+            <td> {{item.quantidade}} {{item.produto.medida}} </td>
             <td> {{item.data_ptbr()}} </td>
         </tr>
 
@@ -57,7 +57,7 @@
  {% for item in despensa %}
         <tr>
             <td> {{item.produto.nome}} </td>
-            <td> {{item.quantidade}} </td>
+            <td> {{item.quantidade}} {{item.produto.medida}} </td>
             <td> {{item.data_ptbr()}} </td>
         </tr>
 

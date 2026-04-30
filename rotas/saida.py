@@ -19,20 +19,9 @@ def saida_api_categoria(cat):
     dados = [{'id': p.id,
               'nome': p.produto.nome,
               'produto_id': p.produto_id,
-              'validade': p.validade
+              'quantidade': p.quantidade,
+              'medida':p.produto.medida,
+              'validade': p.data_ptbr()
             } for p in produtos]
     return jsonify(dados)
     
-## API para o select lote
-@saida.route('/api/lote/<int:produto_id>')
-def saida_api_lote(produto_id):
-    lotes = Entrada.query.filter(Entrada.produto_id==produto_id,  Entrada.quantidade > 0).all()
-
-    dados = [ {'id':l.id,
-              'produto_id': l.produto_id,
-               'nome':l.produto.nome,
-               'validade': l.validade,
-               'quantidade': l.quantidade}
-                for l in lotes ]
-
-    return jsonify(dados)
