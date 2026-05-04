@@ -12,7 +12,7 @@ def entrada_home():
     return render_template('entrada.html', produtos=produtos)
 
 # Cadastro de Tipo de Produto
-@entrada.route('/add_produto', methods = ['POST'])
+@entrada.post('/add_produto')
 def entrada_add_produto():
     nome = unidecode(str(request.form['nome']).upper()) # Tudo em maiúsculo e sem acentuação
     categoria = request.form['categoria']
@@ -74,7 +74,7 @@ def entrada_api_produtos(cat):
 
 from datetime import datetime
 
-@entrada.route('/add_entrada', methods=['POST'])
+@entrada.post('/add_entrada')
 def entrada_add_entrada():
     produto = int(request.form['produto'])
     quantidade = int(request.form['quantidade'])

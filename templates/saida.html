@@ -7,7 +7,7 @@
 <h3> Saída de Materiais </h3>
 <div>
 
-    <form action="" method="post">
+    <form action="/saida/carrinho/add" method="post">
         Categoria: <br>
         <select name="categoria" id="categoria" required>
             <option value="" selected disabled> -- Selecione uma Categoria --</option>
@@ -16,7 +16,7 @@
             <option value="DESPENSA"> Despensa </option>
         </select><br>
 
-        <select id="select_produto">
+        <select id="select_produto" name="select_produto">
             <option value="" selected disabled> -- Selecione um produto -- </option>
             <!-- Inserção por JS ou Jinja -->
         </select><br>
@@ -25,24 +25,34 @@
         <input type="submit" value="Adicionar">
     </form>
 
-    <h3> Itens </h3>
-    
-    Responsável:
-    <input type="text" name="resp" id="resp" required><br>
-    <table>
-        <thead>
-            <tr>
-                <td>Itens</td>
-                <td>Quantidade</td>
-                <td>Ações</td>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Inserção pelo Jinja (session) -->
-        </tbody>
-    </table>
+    <form action="" method="post">
+
+        <h3> Itens </h3>
+
+        Responsável:
+        <input type="text" name="resp" id="resp" required>
+        <input type="submit" value="Finalizar"><br>
+        <table>
+            <thead>
+                <tr>
+                    <td>Itens</td>
+                    <td>Quantidade</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in produtos %}
+                <tr>
+                    <td> {{item.nome}} </td>
+                    <td> {{item.quantidade}} {{item.medida}}</td>
+                    <td> <a href="/saida/carrinho/del/{{ loop.index0 }}"> Excluir </a> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </form>
 </div>
+
 
 <h3> Histórico de Saídas </h3>
 <table>
