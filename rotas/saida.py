@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, session, redirect, request
-from models import Entrada, Saida
+from models import Entrada, Saida, db, ItemSaida
 
 saida = Blueprint('saida', __name__, url_prefix='/saida')
 
@@ -79,5 +79,40 @@ def saida_carrinho_del(index):
 
     session['carrinho'] = carrinho
     session.modified = True
+    
+    return redirect('/saida')
+
+## Finalizar e debitar do estoque
+@saida.post('/carrinho/finalizar')
+def saida_carrinho_finalizar():
+    resposavel = request.form['resp']
+    carrinho = session.get('carrinho', [])
+    
+    if not carrinho:
+        return 'Carrinho vazio'
+    
+    saida = Saida(responsavel=resposavel)
+    db.session.add(saida)
+    db.session.flush()
+    
+    for item in carrinho:
+        produto = Entrada.query.get(item['entrada_id'])
+        
+        if produto.quantidade < item['quantidade']:
+            return f"Estoque insuficiente para {produto.produto.nome}"
+        
+        produto.quantidade -= item['quantidade']
+        
+        item_saida = ItemSaida(
+            saida_id = saida.id,
+            entrada_id = produto.id,
+            quantidade = item['quantidade']
+        )
+        db.session.add(item_saida)
+    
+    db.session.commit()
+
+    session.pop('carrinho', None)
+    
     
     return redirect('/saida')
