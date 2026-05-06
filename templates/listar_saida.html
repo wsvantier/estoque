@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} Itens {%endblock%}
+
+{% block content %}
+
+<h2> Lista de Retirada de Materiais </h2>
+
+<h3> Responsável: {{resp}}</h3>
+
+<h3> Itens </h3>
+<table>
+    <thead>
+        <th>Produto</th>
+        <th>Quantidade</th>
+    </thead>
+    <tbody>
+        {% for item in itens %}  
+        <tr>
+            <td> {{item.entrada.produto.nome}} </td>
+            <td> {{item.quantidade}} </td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+__________________________________________<br>
+Assinatura
+
+
+
+{%endblock%}

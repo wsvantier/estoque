@@ -48,6 +48,9 @@ class Saida(db.Model):
 
     def __repr__(self):
         return f'<Saida {self.data} - {self.responsavel}>'
+    
+    def data_saida(self):
+        return datetime.strftime(self.data,'%d/%m/%Y')
 
 class ItemSaida(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,3 +63,5 @@ class ItemSaida(db.Model):
 
     def __repr__(self):
         return f'<ItemSaida {self.quantidade} de Entrada {self.entrada.id} para Saida {self.saida.id}>'
+    
+   

@@ -57,13 +57,23 @@
 <h3> Histórico de Saídas </h3>
 <table>
     <thead>
-        <th>Responsável</th>
-        <th>Listar itens</th>
-        <th>Ações</th>
+        <tr>
+            <th>Responsável</th>
+            <th>Data</th>
+            <th>Listar itens</th>
+         
+        </tr>
     </thead>
-    <!-- Jinja -->
     <tbody>
+        {% for item in saidas %}
+        
+        <tr>
+            <td> {{ item.responsavel }}</td>
+            <td> {{ item.data_saida() }} </td>
+            <td> <a href="listar/{{item.id}}"> Ver recibo </a> </td>
+        </tr>
 
+        {% endfor %}
     </tbody>
 </table>
 

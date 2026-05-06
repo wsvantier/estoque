@@ -19,8 +19,9 @@ def saida_home():
             'medida': produto.produto.medida
         })
         
+    saidas = Saida.query.all()
     
-    return render_template('saida.html', produtos=itens)
+    return render_template('saida.html', produtos=itens, saidas=saidas)
 
 ## API para o select categoria
 @saida.route('/api/categoria/<cat>')
@@ -115,4 +116,11 @@ def saida_carrinho_finalizar():
     session.pop('carrinho', None)
     
     
-    return redirect('/saida')
+    return redirect(f'/saida/listar/{saida.id}')
+
+# Listar itens que saíram
+@saida.route('/listar/<int:id>')
+def saida_listar(id):
+    saida = Saida.query.get(id)
+    itens = ItemSaida.query.filter_by(saida_id = id).all()
+    return render_template('listar_saida.html', resp = saida.responsavel, itens=itens)
