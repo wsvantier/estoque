@@ -3,19 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {% block title %} Base {% endblock %}</title>
-    <link rel="stylesheet" href={{ url_for('static', filename = 'css/base.css') }}>
+    <title>{% block title %}Base{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS customizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 </head>
 <body>
-<nav>
-    <ul>
-        <li> <a href="/estoque"> Estoque </a></li>
-        <li> <a href="/entrada"> Entrada </a></li>
-        <li> <a href="/saida"> Saida </a></li>
-    </ul>
-</nav>
-{% block content %}
 
-{% endblock %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Controle de Estoque</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/estoque' %}active{% endif %}" href="/estoque">Estoque</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path.startswith('/entrada') %}active{% endif %}" href="/entrada">Entrada</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path.startswith('/saida') %}active{% endif %}" href="/saida">Saída</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Conteúdo principal -->
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqEQpFzCjG1BWrFzZgftF4x/1hvEvX6ZqR9yY5e9I5MTr+ps2iXhkeqO6Mf7V" crossorigin="anonymous"></script>
+
 </body>
 </html>

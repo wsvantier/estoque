@@ -4,65 +4,83 @@
 
 {% block content %}
 
-<h3>Escritorio</h3>
-<table id="tab-escritorio">
-    <thead>
-        <th>Produto</th>
-        <th>Quantidade</th>
-        <th>Validade</th>
-    </thead>
-    <tbody>
-        {% for item in escritorio %}
-        <tr>
-            <td> {{item.produto.nome}} </td>
-            <td> {{item.quantidade}} {{item.produto.medida}} </td>
-            <td> {{item.data_ptbr()}} </td>
-        </tr>
+<div class="container py-4">
 
-        {% endfor %}
-    </tbody>
-</table>
+    <!-- Escritorio -->
+    <div class="mb-5">
+        <h3 class="mb-3">Escritório</h3>
+        <div class="table-responsive">
+            <table id="tab-escritorio" class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Validade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in escritorio %}
+                    <tr>
+                        <td>{{ item.produto.nome }}</td>
+                        <td>{{ item.quantidade }} {{ item.produto.medida }}</td>
+                        <td>{{ item.data_ptbr() }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<h3>Almoxarifado</h3>
-<table id="tab-almoxarifado">
-    <thead>
-        <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Validade</th>
-        </tr>
-    </thead>
-    <tbody>
- {% for item in almoxarifado %}
-        <tr>
-            <td> {{item.produto.nome}} </td>
-            <td> {{item.quantidade}} {{item.produto.medida}} </td>
-            <td> {{item.data_ptbr()}} </td>
-        </tr>
+    <!-- Almoxarifado -->
+    <div class="mb-5">
+        <h3 class="mb-3">Almoxarifado</h3>
+        <div class="table-responsive">
+            <table id="tab-almoxarifado" class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Validade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in almoxarifado %}
+                    <tr>
+                        <td>{{ item.produto.nome }}</td>
+                        <td>{{ item.quantidade }} {{ item.produto.medida }}</td>
+                        <td>{{ item.data_ptbr() }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        {% endfor %}
-    </tbody>
-</table>
+    <!-- Despensa -->
+    <div class="mb-5">
+        <h3 class="mb-3">Despensa</h3>
+        <div class="table-responsive">
+            <table id="tab-despensa" class="table table-striped table-hover table-dark align-middle">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Validade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in despensa %}
+                    <tr>
+                        <td>{{ item.produto.nome }}</td>
+                        <td>{{ item.quantidade }} {{ item.produto.medida }}</td>
+                        <td>{{ item.data_ptbr() }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<h3>Despensa</h3>
-<table id="tab-despensa">
-    <thead>
-        <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Validade</th>
-        </tr>
-    </thead>
-    <tbody>
- {% for item in despensa %}
-        <tr>
-            <td> {{item.produto.nome}} </td>
-            <td> {{item.quantidade}} {{item.produto.medida}} </td>
-            <td> {{item.data_ptbr()}} </td>
-        </tr>
-
-        {% endfor %}
-    </tbody>
-</table>
+</div>
 
 {% endblock %}

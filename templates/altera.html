@@ -1,34 +1,74 @@
 {% extends 'base.html' %}
 
-{% block title %} Alteração de Produto {% endblock %}
+{% block title %}Alteração de Produto{% endblock %}
 
 {% block content %}
 
-<h3> Alteração de Produtos </h3>
+<div class="container py-4">
 
-<form action="" method="post">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="card shadow-sm border-0">
 
-    Nome: <br>
-    <input type="text" name="nome" id="nome" required value = "{{produto.nome}}" ><br>
-    Unidade de medida: <br>
-    <select name="medida" id="medida">
-         <option value="" selected disabled> -- Selecione uma Categoria --</option>
-        <option value="Un"> Unidade </option>
-        <option value="Kg"> Quilograma </option>
-        <option value="L"> Litros </option>
-    </select><br>
-    Categoria: <br>
-    <select name="categoria" id="categoria" required>
-        <option value="" selected disabled> -- Selecione uma Categoria --</option>
-        <option value="ESCRITORIO"> Escritorio </option>
-        <option value="ALMOXARIFADO"> Almoxarifado </option>
-        <option value="DESPENSA"> Despensa </option>
-    </select><br>
-    <input type="submit" value="Alterar">
-</form>
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h4 class="mb-0">Alteração de Produto</h4>
+                </div>
 
-{% for msg in get_flashed_messages() %}
-        <div>{{ msg }}</div>
-{% endfor %}
+                <div class="card-body">
+
+                    <form action="" method="post">
+
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome do Produto</label>
+                            <input 
+                                type="text" 
+                                name="nome" 
+                                id="nome" 
+                                class="form-control" 
+                                value="{{ produto.nome }}" 
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="medida" class="form-label">Unidade de Medida</label>
+                            <select name="medida" id="medida" class="form-select" required>
+                                <option value="" disabled>-- Selecione uma Unidade --</option>
+                                <option value="Un" {% if produto.medida == "Un" %}selected{% endif %}>Unidade</option>
+                                <option value="Kg" {% if produto.medida == "Kg" %}selected{% endif %}>Quilograma</option>
+                                <option value="L" {% if produto.medida == "L" %}selected{% endif %}>Litros</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <select name="categoria" id="categoria" class="form-select" required>
+                                <option value="" disabled>-- Selecione uma Categoria --</option>
+                                <option value="ESCRITORIO" {% if produto.categoria == "ESCRITORIO" %}selected{% endif %}>Escritório</option>
+                                <option value="ALMOXARIFADO" {% if produto.categoria == "ALMOXARIFADO" %}selected{% endif %}>Almoxarifado</option>
+                                <option value="DESPENSA" {% if produto.categoria == "DESPENSA" %}selected{% endif %}>Despensa</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Alterar Produto
+                            </button>
+                        </div>
+
+                    </form>
+
+                    {% for msg in get_flashed_messages() %}
+                    <div class="alert alert-info mt-3">
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}
