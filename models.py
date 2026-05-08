@@ -5,9 +5,9 @@ db = SQLAlchemy()
 
 class Produto(db.Model):
     id = db.Column( db.Integer, primary_key = True )
-    nome = db.Column( db.String(), nullable = False, unique = True )
-    categoria = db.Column( db.String(), nullable = False )
-    medida = db.Column( db.String(), nullable = False ) # Unidade, Kg ou Litro
+    nome = db.Column( db.String(100), nullable = False, unique = True )
+    categoria = db.Column( db.String(100), nullable = False )
+    medida = db.Column( db.String(100), nullable = False ) # Unidade, Kg ou Litro
 
     def __repr__(self):
         return f'<Produto {self.nome}>'
@@ -44,7 +44,7 @@ class Entrada(db.Model):
 class Saida(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.Date, nullable=False, default=date.today)
-    responsavel = db.Column(db.String(), nullable=False)
+    responsavel = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
         return f'<Saida {self.data} - {self.responsavel}>'
