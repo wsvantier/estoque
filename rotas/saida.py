@@ -23,13 +23,13 @@ def saida_home():
     
     return render_template('saida.html', produtos=itens, saidas=saidas)
 
-## API para o select categoria
+'''## API para o select categoria
 @saida.route('/api/categoria/<cat>')
 def saida_api_categoria(cat):
     produtos = Entrada.query.filter(
     Entrada.produto.has(categoria=cat),  # Filtra pelo produto relacionado
     Entrada.quantidade > 0
-).all()
+).order_by().all()
     
     dados = [{'id': p.id,
               'nome': p.produto.nome,
@@ -38,7 +38,31 @@ def saida_api_categoria(cat):
               'medida':p.produto.medida,
               'validade': p.data_ptbr()
             } for p in produtos]
+    return jsonify(dados)'''
+
+from models import Entrada, Produto  # Certifique-se de importar o modelo Produto
+from flask import jsonify
+
+## API para o select categoria
+@saida.route('/api/categoria/<cat>')
+def saida_api_categoria(cat):
+    # Faz o join com Produto para conseguir ordenar pelo nome dele
+    produtos = (Entrada.query
+                .join(Entrada.produto)
+                .filter(Produto.categoria == cat, Entrada.quantidade > 0)
+                .order_by(Produto.nome.asc())
+                .all())
+
+    dados = [{'id': p.id,
+              'nome': p.produto.nome,
+              'produto_id': p.produto_id,
+              'quantidade': p.quantidade,
+              'medida': p.produto.medida,
+              'validade': p.data_ptbr()
+            } for p in produtos]
+
     return jsonify(dados)
+
     
 ### Carrinho ###
 

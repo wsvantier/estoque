@@ -62,7 +62,7 @@ def entrada_delete(id):
 
 @entrada.route('/api/produtos/<cat>')
 def entrada_api_produtos(cat):
-    produtos = Produto.query.filter_by(categoria=cat).all()
+    produtos = Produto.query.filter_by(categoria=cat).order_by(Produto.nome).all()
     
     dados = [{'id': p.id,
               'nome': p.nome 

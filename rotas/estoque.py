@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+'''from flask import Blueprint, render_template
 from models import Entrada
 
 estoque = Blueprint('estoque', __name__, url_prefix='/estoque')
@@ -9,4 +9,33 @@ def estoque_home():
     almoxarifado = Entrada.query.filter(Entrada.produto.has(categoria='ALMOXARIFADO')).all()
     despensa = Entrada.query.filter(Entrada.produto.has(categoria='DESPENSA')).all()
     
+    return render_template('estoque.html', escritorio=escritorio, almoxarifado=almoxarifado, despensa=despensa)'''
+
+from flask import Blueprint, render_template
+from models import Entrada, Produto  # Importe o modelo Produto aqui
+
+estoque = Blueprint('estoque', __name__, url_prefix='/estoque')
+
+@estoque.route('/')
+def estoque_home():
+    # Filtra por categoria e ordena pelo nome do produto em ordem alfabética
+    escritorio = (Entrada.query
+                  .join(Entrada.produto)
+                  .filter(Produto.categoria == 'ESCRITORIO')
+                  .order_by(Produto.nome.asc())
+                  .all())
+
+    almoxarifado = (Entrada.query
+                    .join(Entrada.produto)
+                    .filter(Produto.categoria == 'ALMOXARIFADO')
+                    .order_by(Produto.nome.asc())
+                    .all())
+
+    despensa = (Entrada.query
+                .join(Entrada.produto)
+                .filter(Produto.categoria == 'DESPENSA')
+                .order_by(Produto.nome.asc())
+                .all())
+
     return render_template('estoque.html', escritorio=escritorio, almoxarifado=almoxarifado, despensa=despensa)
+
