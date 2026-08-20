@@ -163,7 +163,7 @@
         <div class="card-body">
 
             <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle">
+                <table id="tabela" class="table table-striped table-hover align-middle">
 
                     <thead class="table-dark">
                         <tr>
@@ -213,5 +213,30 @@
 </div>
 
 <script src="{{url_for('static', filename='js/entrada.js')}}"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-3.0.2/datatables.min.js" ></script>
+<script>
+new DataTable('#tabela', {
+    language: {
+        decimal: ',',
+        thousands: '.',
+        emptyTable: 'Nenhum registro encontrado',
+        info: 'Mostrando de _START_ até _END_ de _TOTAL_ registros',
+        infoEmpty: 'Mostrando 0 até 0 de 0 registros',
+        infoFiltered: '(Filtrados de _MAX_ registros)',
+        lengthMenu: 'Mostrar _MENU_ registros',
+        loadingRecords: 'Carregando...',
+        processing: 'Processando...',
+        search: 'Pesquisar:',
+        zeroRecords: 'Nenhum registro encontrado',
+        paginate: {
+            first: 'Primeiro',
+            last: 'Último',
+            next: 'Próximo',
+            previous: 'Anterior'
+        }
+    }
+});
+</script>
+
 
 {% endblock %}
